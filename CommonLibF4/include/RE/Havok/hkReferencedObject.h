@@ -17,6 +17,18 @@ namespace RE
 		virtual const hkClass* GetClassType() const { return nullptr; }   // 02
 		virtual void DeleteThisReferencedObject() const { delete this; }  // 03
 
+		void addReference() {
+			using func_t = decltype(&hkReferencedObject::addReference);
+			REL::Relocation<func_t> func{ REL::ID(866015) };
+			return func(this);
+		}
+
+		void removeReference() {
+			using func_t = decltype(&hkReferencedObject::removeReference);
+			REL::Relocation<func_t> func{ REL::ID(1379897) };
+			return func(this);
+		}
+
 		// members
 		std::uint32_t memSizeAndRefCount;  // 08
 	};
