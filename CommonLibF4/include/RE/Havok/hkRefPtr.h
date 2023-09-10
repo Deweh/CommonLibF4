@@ -14,6 +14,15 @@ namespace RE
 			TryAttach();
 		}
 
+		hkRefPtr(hkRefPtr& other) {
+			reset(other);
+		}
+		
+		hkRefPtr(hkRefPtr&& other) {
+			reset(other.get());
+			other.reset();
+		}
+
 		~hkRefPtr() noexcept
 		{
 			TryDetach();
@@ -36,6 +45,24 @@ namespace RE
 
 		void operator=(T* ptr)
 		{
+			reset(ptr);
+		}
+
+		void operator=(hkRefPtr<T>& other) {
+			reset(other.get());
+		}
+
+		void operator=(hkRefPtr<T>&& other) {
+			reset(other.get());
+			other.reset();
+		}
+
+		void reset() {
+			TryDetach();
+			_ptr = nullptr;
+		}
+
+		void reset(T* ptr) {
 			TryDetach();
 			_ptr = ptr;
 			TryAttach();
