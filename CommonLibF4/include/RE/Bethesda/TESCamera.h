@@ -253,6 +253,12 @@ namespace RE
 			return func(this, a_pitch, a_yaw, a_roll);
 		}
 
+		void RestoreCollidedActorFade() {
+			using func_t = decltype(&PlayerCamera::RestoreCollidedActorFade);
+			REL::Relocation<func_t> func{ REL::ID(527688) };
+			return func(this);
+		}
+
 		template <class T>
 		[[nodiscard]] BSTSmartPointer<T> GetState() const  //
 			requires(std::derived_from<T, TESCameraState>)
