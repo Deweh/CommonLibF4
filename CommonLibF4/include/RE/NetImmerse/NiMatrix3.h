@@ -14,7 +14,7 @@ namespace RE
 			entry[2].v = { 0.0F, 0.0F, 1.0F, 0.0F };
 		}
 
-		bool ToEulerAnglesXYZ(float* angleX, float* angleY, float* angleZ)
+		bool ToEulerAnglesXYZ(float* angleX, float* angleY, float* angleZ) const
 		{
 			using func_t = decltype(&NiMatrix3::ToEulerAnglesXYZ);
 			REL::Relocation<func_t> func{ REL::ID(34114) };
@@ -40,6 +40,36 @@ namespace RE
 			using func_t = decltype(&NiMatrix3::FromEulerAnglesYXZ);
 			REL::Relocation<func_t> func{ REL::ID(55761) };
 			return func(this, angleY, angleX, angleZ);
+		}
+
+		float Determinant() const
+		{
+			using func_t = decltype(&NiMatrix3::Determinant);
+			REL::Relocation<func_t> func{ REL::ID(537682) };
+			return func(this);
+		}
+
+		bool Inverse(NiMatrix3& resultOut) const
+		{
+			using func_t = decltype(&NiMatrix3::Inverse);
+			REL::Relocation<func_t> func{ REL::ID(549485) };
+			return func(this, resultOut);
+		}
+
+		void Deflect()
+		{
+			if (Determinant() < 0) {
+				RE::NiMatrix3 result;
+				Inverse(result);
+				(*this) = result;
+			}
+		}
+
+		NiMatrix3& operator*(const NiMatrix3& rhs) const
+		{
+			using func_t = decltype(&NiMatrix3::operator*);
+			REL::Relocation<func_t> func{ REL::ID(863357) };
+			return func(this, rhs);
 		}
 
 		// members

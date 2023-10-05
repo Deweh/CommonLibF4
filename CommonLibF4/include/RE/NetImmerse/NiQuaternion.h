@@ -37,6 +37,20 @@ namespace RE
 			REL::Relocation<func_t> func{ REL::ID(1338018) };
 			return func(this, a_time, a_begin, a_end);
 		}
+
+		NiQuaternion& UnitInverse(const NiQuaternion& q)
+		{
+			using func_t = decltype(&NiQuaternion::UnitInverse);
+			REL::Relocation<func_t> func{ REL::ID(1310622) };
+			return func(this, q);
+		}
+
+		NiQuaternion& operator*=(const NiQuaternion& rhs)
+		{
+			using func_t = decltype(&NiQuaternion::operator*=);
+			REL::Relocation<func_t> func{ REL::ID(804852) };
+			return func(this, rhs);
+		}
 	};
 	static_assert(sizeof(NiQuaternion) == 0x10);
 }
