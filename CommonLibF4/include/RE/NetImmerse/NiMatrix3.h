@@ -14,7 +14,7 @@ namespace RE
 			entry[2].v = { 0.0F, 0.0F, 1.0F, 0.0F };
 		}
 
-		bool ToEulerAnglesXYZ(float* angleX, float* angleY, float* angleZ) const
+		bool ToEulerAnglesXYZ(float& angleX, float& angleY, float& angleZ) const
 		{
 			using func_t = decltype(&NiMatrix3::ToEulerAnglesXYZ);
 			REL::Relocation<func_t> func{ REL::ID(34114) };
@@ -28,11 +28,18 @@ namespace RE
 			return func(this, angleX, angleY, angleZ);
 		}
 
+		bool ToEulerAnglesZXY(float& angleZ, float& angleX, float& angleY) const
+		{
+			using func_t = decltype(&NiMatrix3::ToEulerAnglesZXY);
+			REL::Relocation<func_t> func{ REL::ID(606387) };
+			return func(this, angleZ, angleX, angleY);
+		}
+
 		bool FromEulerAnglesZXY(float angleZ, float angleX, float angleY)
 		{
 			using func_t = decltype(&NiMatrix3::FromEulerAnglesZXY);
 			REL::Relocation<func_t> func{ REL::ID(326460) };
-			return func(this, angleX, angleY, angleZ);
+			return func(this, angleZ, angleX, angleY);
 		}
 
 		bool FromEulerAnglesYXZ(float angleY, float angleX, float angleZ)
