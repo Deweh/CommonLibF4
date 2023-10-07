@@ -18,21 +18,21 @@ namespace RE
 		void InvertNonUniform(NiTransform& result) const
 		{
 			using func_t = decltype(&NiTransform::InvertNonUniform);
-			REL::Relocation<func_t> func{ REL::ID(34114) };
+			REL::Relocation<func_t> func{ REL::ID(720044) };
 			return func(this, result);
 		}
 
 		void Invert(NiTransform& result) const
 		{
 			using func_t = decltype(&NiTransform::Invert);
-			REL::Relocation<func_t> func{ REL::ID(34114) };
+			REL::Relocation<func_t> func{ REL::ID(421427) };
 			return func(this, result);
 		}
 
 		NiTransform& Multiply(NiTransform& result, const NiTransform& rhs) const
 		{
 			using func_t = decltype(&NiTransform::Multiply);
-			REL::Relocation<func_t> func{ REL::ID(34114) };
+			REL::Relocation<func_t> func{ REL::ID(739335) };
 			return func(this, result, rhs);
 		}
 
