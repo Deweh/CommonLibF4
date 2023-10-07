@@ -56,15 +56,6 @@ namespace RE
 			return func(this, resultOut);
 		}
 
-		void Deflect()
-		{
-			if (Determinant() < 0) {
-				RE::NiMatrix3 result;
-				Inverse(result);
-				(*this) = result;
-			}
-		}
-
 		NiMatrix3& operator*(const NiMatrix3& rhs) const
 		{
 			using func_t = decltype(&NiMatrix3::operator*);
