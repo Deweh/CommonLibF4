@@ -31,11 +31,32 @@ namespace RE
 			return func(this, a_X, a_Y, a_Z);
 		}
 
+		void FromAngleAxis(float angle, const RE::NiPoint3& axis)
+		{
+			using func_t = decltype(&NiQuaternion::FromAngleAxis);
+			REL::Relocation<func_t> func{ REL::ID(965178) };
+			return func(this, angle, axis);
+		}
+
+		void ToAngleAxis(float& angle, RE::NiPoint3& axis)
+		{
+			using func_t = decltype(&NiQuaternion::ToAngleAxis);
+			REL::Relocation<func_t> func{ REL::ID(1082915) };
+			return func(this, angle, axis);
+		}
+
 		void Slerp(float a_time, const NiQuaternion& a_begin, const NiQuaternion& a_end)
 		{
 			using func_t = decltype(&NiQuaternion::Slerp);
 			REL::Relocation<func_t> func{ REL::ID(1338018) };
 			return func(this, a_time, a_begin, a_end);
+		}
+
+		NiQuaternion& Intermediate(const NiQuaternion& before, const NiQuaternion& current, const NiQuaternion& after)
+		{
+			using func_t = decltype(&NiQuaternion::Intermediate);
+			REL::Relocation<func_t> func{ REL::ID(419306) };
+			return func(this, before, current, after);
 		}
 
 		NiQuaternion& UnitInverse(const NiQuaternion& q)
