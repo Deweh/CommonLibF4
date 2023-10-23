@@ -38,16 +38,101 @@ namespace RE
 			return func(this, a_transform, a_pointOut);
 		}
 
-		void operator+=(const RE::NiPoint3& other) {
-			x += other.x;
-			y += other.y;
-			z += other.z;
+		RE::NiPoint3 GetVelocity(const RE::NiPoint3& endPoint, float timeDiff) {
+			return (endPoint - (*this)) / timeDiff; 
 		}
 
-		void operator-=(const RE::NiPoint3& other) {
-			x -= other.x;
-			y -= other.y;
-			z -= other.z;
+		bool operator==(const NiPoint3& a_rhs) const
+		{
+			return x == a_rhs.x && y == a_rhs.y && z == a_rhs.z;
+		}
+
+		bool operator!=(const NiPoint3& a_rhs) const
+		{
+			return !operator==(a_rhs);
+		}
+
+		NiPoint3 operator+(const NiPoint3& a_rhs) const
+		{
+			return {
+				x + a_rhs.x,
+				y + a_rhs.y,
+				z + a_rhs.z
+			};
+		}
+
+		NiPoint3 operator-(const NiPoint3& a_rhs) const
+		{
+			return {
+				x - a_rhs.x,
+				y - a_rhs.y,
+				z - a_rhs.z
+			};
+		}
+
+		float operator*(const NiPoint3& a_rhs) const
+		{
+			return x * a_rhs.x + y * a_rhs.y + z * a_rhs.z;
+		}
+
+		NiPoint3 operator*(float a_scalar) const
+		{
+			return { x * a_scalar, y * a_scalar, z * a_scalar };
+		}
+
+		NiPoint3 operator/(float a_scalar) const
+		{
+			return { x / a_scalar, y / a_scalar, z / a_scalar };
+		}
+
+		NiPoint3 operator-() const
+		{
+			return { -x, -y, -z };
+		}
+
+		NiPoint3& operator+=(const NiPoint3& a_rhs)
+		{
+			x += a_rhs.x;
+			y += a_rhs.y;
+			z += a_rhs.z;
+			return *this;
+		}
+
+		NiPoint3& operator-=(const NiPoint3& a_rhs)
+		{
+			x -= a_rhs.x;
+			y -= a_rhs.y;
+			z -= a_rhs.z;
+			return *this;
+		}
+
+		NiPoint3& operator*=(const NiPoint3& a_rhs)
+		{
+			x *= a_rhs.x;
+			y *= a_rhs.y;
+			z *= a_rhs.z;
+			return *this;
+		}
+
+		NiPoint3& operator/=(const NiPoint3& a_rhs)
+		{
+			x /= a_rhs.x;
+			y /= a_rhs.y;
+			z /= a_rhs.z;
+			return *this;
+		}
+
+		NiPoint3& operator*=(float a_scalar)
+		{
+			x *= a_scalar;
+			y *= a_scalar;
+			z *= a_scalar;
+			return *this;
+		}
+
+		NiPoint3& operator/=(float a_scalar)
+		{
+			return operator*=(1.0F / a_scalar);
 		}
 
 		template <class Archive>

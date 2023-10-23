@@ -66,11 +66,51 @@ namespace RE
 			return func(this, q);
 		}
 
-		NiQuaternion& operator*=(const NiQuaternion& rhs)
+		RE::NiQuaternion Invert() {
+			return { -w, x, y, z };
+		}
+
+		RE::NiQuaternion Abs() {
+			return { w < 0.0 ? -w : w, x, y, z };
+		}
+
+		NiQuaternion operator*(const NiQuaternion& a_rhs)
 		{
-			using func_t = decltype(&NiQuaternion::operator*=);
-			REL::Relocation<func_t> func{ REL::ID(804852) };
-			return func(this, rhs);
+			return {
+				a_rhs.w * w - a_rhs.x * x - a_rhs.y * y - a_rhs.z * z,
+				a_rhs.w * x + a_rhs.x * w - a_rhs.y * z + a_rhs.z * y,
+				a_rhs.w * y + a_rhs.x * z + a_rhs.y * w - a_rhs.z * x,
+				a_rhs.w * z - a_rhs.x * y + a_rhs.y * x + a_rhs.z * w
+			};
+		}
+
+		void operator*=(const NiQuaternion& a_rhs) {
+			(*this) = operator*(a_rhs);
+		}
+
+		NiQuaternion operator*(float s)
+		{
+			return { w * s, x * s, y * s, z * s };
+		}
+
+		NiQuaternion operator+(const NiQuaternion& a_rhs)
+		{
+			return { w + a_rhs.w, x + a_rhs.x, y + a_rhs.y, z + a_rhs.z };
+		}
+
+		RE::NiQuaternion operator-(const RE::NiQuaternion& a_rhs)
+		{
+			return { w - a_rhs.w, x - a_rhs.x, y - a_rhs.y, z - a_rhs.z };
+		}
+
+		RE::NiQuaternion operator/(float s)
+		{
+			return { w / s, x / s, y / s, z / s };
+		}
+
+		RE::NiQuaternion operator-()
+		{
+			return { -w, -x, -y, -z };
 		}
 	};
 	static_assert(sizeof(NiQuaternion) == 0x10);
