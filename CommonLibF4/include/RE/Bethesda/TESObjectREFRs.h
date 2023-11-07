@@ -839,9 +839,17 @@ namespace RE
 			return func(this);
 		}
 
-		const char* GetBaseFullName() {
+		const char* GetBaseFullName()
+		{
 			using func_t = decltype(&TESObjectREFR::GetBaseFullName);
 			REL::Relocation<func_t> func{ REL::ID(1502668) };
+			return func(this);
+		}
+
+		const char* GetDisplayFullName()
+		{
+			using func_t = decltype(&TESObjectREFR::GetDisplayFullName);
+			REL::Relocation<func_t> func{ REL::ID(1212056) };
 			return func(this);
 		}
 
