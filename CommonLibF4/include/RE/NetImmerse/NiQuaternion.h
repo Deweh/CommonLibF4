@@ -10,7 +10,17 @@ namespace RE
 		float y{ 0.0f };  // 08
 		float z{ 0.0f };  // 0C
 
-		void FromRotation(const NiMatrix3& a_rotation) const
+		NiQuaternion() {}
+
+		NiQuaternion(float w, float x, float y, float z) :
+			w(w), x(x), y(y), z(z) {}
+
+		NiQuaternion(const NiMatrix3& a_rotation)
+		{
+			FromRotation(a_rotation);
+		}
+
+		void FromRotation(const NiMatrix3& a_rotation)
 		{
 			using func_t = decltype(&NiQuaternion::FromRotation);
 			REL::Relocation<func_t> func{ REL::ID(616807) };
@@ -66,11 +76,46 @@ namespace RE
 			return func(this, q);
 		}
 
-		RE::NiQuaternion Invert() const {
+		//Unpacks a vector into a quaternion.
+		NiQuaternion& Exp(const NiQuaternion& q)
+		{
+			using func_t = decltype(&NiQuaternion::Exp);
+			REL::Relocation<func_t> func{ REL::ID(1223920) };
+			return func(this, q);
+		}
+
+		//Packs a quaternion into a vector.
+		NiQuaternion& Log(const NiQuaternion& q)
+		{
+			using func_t = decltype(&NiQuaternion::Log);
+			REL::Relocation<func_t> func{ REL::ID(1483822) };
+			return func(this, q);
+		}
+
+		NiQuaternion ExpN(const NiQuaternion& q) {
+			NiQuaternion result;
+			result.Exp(q);
+			return result;
+		}
+
+		NiQuaternion LogN(const NiQuaternion& q) {
+			NiQuaternion result;
+			result.Log(q);
+			return result;
+		}
+
+		NiQuaternion InvertScalar() const
+		{
 			return { -w, x, y, z };
 		}
 
-		RE::NiQuaternion Abs() const {
+		NiQuaternion InvertVector() const
+		{
+			return { w, -x, -y, -z };
+		}
+
+		NiQuaternion Abs() const
+		{
 			return { w < 0.0 ? -w : w, x, y, z };
 		}
 
@@ -91,6 +136,10 @@ namespace RE
 		NiQuaternion operator*(float s) const
 		{
 			return { w * s, x * s, y * s, z * s };
+		}
+
+		static NiQuaternion operator*(float s, NiQuaternion q) {
+			return q * s;
 		}
 
 		NiQuaternion operator+(const NiQuaternion& a_rhs) const
