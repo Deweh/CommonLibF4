@@ -92,15 +92,17 @@ namespace RE
 			return func(this, q);
 		}
 
-		NiQuaternion ExpN(const NiQuaternion& q) {
+		NiQuaternion ExpN()
+		{
 			NiQuaternion result;
-			result.Exp(q);
+			result.Exp(*this);
 			return result;
 		}
 
-		NiQuaternion LogN(const NiQuaternion& q) {
+		NiQuaternion LogN()
+		{
 			NiQuaternion result;
-			result.Log(q);
+			result.Log(*this);
 			return result;
 		}
 
@@ -129,17 +131,14 @@ namespace RE
 			};
 		}
 
-		void operator*=(const NiQuaternion& a_rhs) {
+		void operator*=(const NiQuaternion& a_rhs)
+		{
 			(*this) = operator*(a_rhs);
 		}
 
 		NiQuaternion operator*(float s) const
 		{
 			return { w * s, x * s, y * s, z * s };
-		}
-
-		static NiQuaternion operator*(float s, NiQuaternion q) {
-			return q * s;
 		}
 
 		NiQuaternion operator+(const NiQuaternion& a_rhs) const
