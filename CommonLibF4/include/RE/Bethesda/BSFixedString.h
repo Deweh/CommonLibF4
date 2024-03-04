@@ -148,6 +148,30 @@ namespace RE
 				}
 			}
 
+			template <class T>
+			[[nodiscard]] friend bool operator<(const T& a_lhs, const T& a_rhs) noexcept
+				requires(std::same_as<T, BSFixedString>)
+			{
+				if (a_lhs.empty() && a_rhs.empty()) {
+					return false;
+				} else if (const auto length = a_lhs.length(); length != a_rhs.length()) {
+					return length < a_rhs.length();
+				} else {
+					return strncmp(a_lhs.c_str(), a_rhs.data(), length) < 0;
+				}
+			}
+
+			[[nodiscard]] friend bool operator<(const BSFixedString& a_lhs, std::basic_string_view<value_type> a_rhs)
+			{
+				if (a_lhs.empty() && a_rhs.empty()) {
+					return false;
+				} else if (const auto length = a_lhs.length(); length != a_rhs.length()) {
+					return length < a_rhs.length();
+				} else {
+					return strncmp(a_lhs.c_str(), a_rhs.data(), length) < 0;
+				}
+			}
+
 		protected:
 			template <class>
 			friend struct RE::BSCRC32;
